@@ -1,45 +1,85 @@
 **AI-Engineering — NLP Projects**
 
 **Overview**
-- **Project:**: A small collection of natural language processing (NLP) notebooks and datasets for learning and experiments.
-- **Purpose:**: Provide clear examples for text preprocessing, part-of-speech tagging, named-entity recognition, and sentiment-related exploration using public datasets.
+- **Project:**: A small learning collection of natural language processing (NLP) notebooks and example datasets.
+- **Goal:**: Help learners and researchers practice common NLP tasks such as text cleaning, tokenization, part-of-speech (POS) tagging, named-entity recognition (NER), and basic sentiment exploration.
 
-**Data**
-- **Files:**: `bbc_news.csv`, `tripadvisor_hotel_reviews.csv`
-- **Description:**: CSV files with news articles and hotel reviews used in the notebooks for demonstrations and exercises.
+**Datasets**
+- **Files included:**: `bbc_news.csv`, `tripadvisor_hotel_reviews.csv` (CSV format).
+- **Short description:**: `bbc_news.csv` contains news articles (useful for topic and text classification experiments). `tripadvisor_hotel_reviews.csv` contains hotel reviews (useful for sentiment analysis and preprocessing exercises).
 
-**Notebooks**
-- **Files:**: `NLP_POS_and_NER.ipynb`, `NLP_Text_Pre_Processing.ipynb`
-- **What they do:**: The notebooks show practical steps for cleaning text, tokenization, POS tagging, NER, and common pre-processing pipelines for ML/NLP tasks.
+**Notebooks (high level)**
+- `NLP_Text_Pre_Processing.ipynb` — Basic text cleaning, tokenization, stopword removal, lemmatization, and example pipelines for preparing data for ML models.
+- `NLP_POS_and_NER.ipynb` — Demonstrations of part-of-speech tagging and named-entity recognition using libraries like `nltk` and `spaCy`.
 
-**Project Structure**
-- **Root files:**: Datasets and notebooks live in the project root.
-- **Where to start:**: Open `NLP_Text_Pre_Processing.ipynb` for basic cleaning and tokenization, then explore `NLP_POS_and_NER.ipynb` for tagging and entity recognition.
+**Why this repo is useful**
+- **Learning-focused:**: Notebooks include clear, commented steps so learners can follow and adapt the code.
+- **Small and reproducible:**: Designed to run on a local machine with moderate RAM.
 
-**Requirements**
-- **Recommendation:**: Use Python 3.8+ and install common NLP libraries such as `pandas`, `numpy`, `nltk`, `spacy`, and `scikit-learn`.
-- **Example install:**
+**Environment & Requirements**
+- **Python version:**: Recommended 3.8 or newer.
+- **Main libraries:**: `pandas`, `numpy`, `nltk`, `spacy`, `scikit-learn`, `jupyterlab` or `notebook`.
+- **Suggested virtual environment:**
+```bash
+python -m venv .venv
+source .venv/bin/activate
 ```
-python -m pip install --upgrade pip
-python -m pip install pandas numpy nltk spacy scikit-learn jupyterlab
+- **Install dependencies:**
+```bash
+pip install --upgrade pip
+pip install pandas numpy nltk spacy scikit-learn jupyterlab
 python -m spacy download en_core_web_sm
 ```
 
-**How to run**
-- **Start Jupyter Lab:**
+**Quick Start**
+- Open the project folder in VS Code or start Jupyter Lab:
 ```bash
+# From project root
 jupyter lab
+# or
+jupyter notebook
 ```
-- **Open a notebook:**: Click on `NLP_Text_Pre_Processing.ipynb` or `NLP_POS_and_NER.ipynb` in the browser interface.
+- Then open and run cells in `NLP_Text_Pre_Processing.ipynb` to begin. Work through `NLP_POS_and_NER.ipynb` for tagging and entity examples.
 
-**Tips**
-- **Reduce memory use:**: If datasets are large, consider loading a subset with `pandas.read_csv(..., nrows=10000)` for experiments.
-- **Repeatability:**: Set random seeds where needed (for example in `scikit-learn`) to make experiments reproducible.
+**Usage examples**
+- Load a small sample (faster for testing):
+```python
+import pandas as pd
+df = pd.read_csv('tripadvisor_hotel_reviews.csv', nrows=5000)
+```
+- Example: basic tokenization with spaCy
+```python
+import spacy
+nlp = spacy.load('en_core_web_sm')
+doc = nlp('This is an example sentence for tokenization and POS tagging.')
+for token in doc:
+	print(token.text, token.pos_)
+```
+
+**Best practices**
+- Use a virtual environment to avoid dependency conflicts.  
+- Save intermediate datasets (cleaned versions) to speed exploration.  
+- Fix random seeds (`random`, `numpy.random`, or `sklearn` functions) for reproducible results.
 
 **Contributing**
-- **How to help:**: Add new notebooks, improved preprocessing steps, or small scripts to load and clean the datasets. Open a pull request with a short description of the change.
+- **Additions welcome:**: New notebooks, helper scripts, or improved preprocessing methods are useful.  
+- **How to contribute:**: Create a branch, add your changes, and open a pull request with a clear description. If you add packages, include or update a `requirements.txt`.
+
+**Files to consider adding**
+- `requirements.txt` — pinned dependencies for easy install.  
+- `data/` — a directory to store datasets instead of keeping them at root.  
+- `LICENSE` — add a license (for example `MIT`) if you plan to share publicly.
 
 **License & Contact**
-- **License:**: This repository does not include a license file. Add one if you plan to share widely (for example, `MIT`).
-- **Contact:**: For questions or suggestions, open an issue in this repository.
+- **License:**: No license file is included. Add one if you want to define sharing permissions (recommended: `MIT`).
+- **Contact / Issues:**: Use the repository Issues to report problems or ask questions.
+
+---
+
+If you want, I can:
+- create a `requirements.txt` with the recommended libraries, or
+- move datasets into a `data/` folder and update the notebooks, or
+- translate the README into Portuguese.
+
+Thank you — let me know which improvements you prefer next.
 
