@@ -43,4 +43,3 @@ jupyter lab
 - **License:**: This repository does not include a license file. Add one if you plan to share widely (for example, `MIT`).
 - **Contact:**: For questions or suggestions, open an issue in this repository.
 
----
