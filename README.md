@@ -1,102 +1,580 @@
-**AI-Engineering — NLP Projects**
+# AI-Engineering — LLM & NLP Projects
 
-**Overview**
-- **Project:**: A small learning collection of natural language processing (NLP) notebooks and example datasets.
-- **Goal:**: Help learners and researchers practice common NLP tasks such as text cleaning, tokenization, part-of-speech (POS) tagging, named-entity recognition (NER), and basic sentiment exploration.
+**A comprehensive collection of Large Language Models (LLM) and Natural Language Processing (NLP) learning projects with Jupyter notebooks, datasets, and practical examples.**
 
-**Datasets**
-- **Files included:**: `bbc_news.csv`, `tripadvisor_hotel_reviews.csv` (CSV format).
-- **Short description:**: `bbc_news.csv` contains news articles (useful for topic and text classification experiments). `tripadvisor_hotel_reviews.csv` contains hotel reviews (useful for sentiment analysis and preprocessing exercises).
+---
 
-**Notebooks (high level)**
-- `NLP_Text_Pre_Processing.ipynb` — Basic text cleaning, tokenization, stopword removal, lemmatization, and example pipelines for preparing data for ML models.
-- `NLP_POS_and_NER.ipynb` — Demonstrations of part-of-speech tagging and named-entity recognition using libraries like `nltk` and `spaCy`.
+## Table of Contents
 
-**Why this repo is useful**
-- **Learning-focused:**: Notebooks include clear, commented steps so learners can follow and adapt the code.
-- **Small and reproducible:**: Designed to run on a local machine with moderate RAM.
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [LLMs_Projects](#llms_projects)
+- [NLP_Projects](#nlp_projects)
+- [Environment & Requirements](#environment--requirements)
+- [Quick Start](#quick-start)
+- [Usage Examples](#usage-examples)
+- [Best Practices](#best-practices)
+- [Git Configuration](#git-configuration)
+- [Contributing](#contributing)
+- [License & Contact](#license--contact)
 
-**Environment & Requirements**
-- **Python version:**: Recommended 3.8 or newer.
-- **Main libraries:**: `pandas`, `numpy`, `nltk`, `spacy`, `scikit-learn`, `jupyterlab` or `notebook`.
-- **Suggested virtual environment:**
-```bash
-python -m venv .venv
-source .venv/bin/activate
+---
+
+## Overview
+
+This repository contains two complementary learning paths for AI/ML engineers:
+
+1. **LLMs_Projects** — Hands-on notebooks for working with Large Language Models (GPT models, LangChain, and Hugging Face Transformers)
+2. **NLP_Projects** — Comprehensive NLP tutorials covering text preprocessing, sentiment analysis, topic modeling, and text classification
+
+Both sections are designed for:
+- **Learning & experimentation** with state-of-the-art AI models
+- **Reproducibility** on local machines with moderate resources
+- **Clear documentation** with step-by-step implementations
+
+---
+
+## Project Structure
+
 ```
-- **Install dependencies:**
+AI-Engineering/
+├── README.md                          # This file
+├── .gitignore                         # Git ignore rules
+├── LLMs_Projects/                     # Large Language Models projects
+│   ├── config.py                      # API configuration (ignored in git)
+│   ├── GPT Models.ipynb               # OpenAI GPT API interactions
+│   ├── Langchain.ipynb                # LangChain framework examples
+│   ├── HuggingFace Transformers.ipynb # Hugging Face model usage
+│   └── my_saved_models/               # Directory for cached/saved models
+│
+└── NLP_Projects/                      # Natural Language Processing projects
+    ├── NLP_Text_Pre_Processing.ipynb         # Text cleaning, tokenization, lemmatization
+    ├── NLP_Sentiment_Analysis.ipynb          # VADER & transformer-based sentiment
+    ├── NLP_POS_and_NER.ipynb                 # Part-of-speech tagging & named entities
+    ├── NLP_Text_Classifier.ipynb             # Text classification techniques
+    ├── NLP_Topic_Modelling_LDA.ipynb         # Latent Dirichlet Allocation
+    ├── NLP_Topic_Modelling_LSA.ipynb         # Latent Semantic Analysis
+    ├── NLP_Vectorizing_Text_Count_Vectorizer.ipynb  # Count-based text vectors
+    ├── NLP_Vectorizing_Text_TF-IDF.ipynb     # TF-IDF vectorization
+    ├── NLP_Categorizing_Fake_News.ipynb      # Fake news detection pipeline
+    ├── bbc_news.csv                          # BBC news articles dataset
+    ├── fake_news_data.csv                    # Labeled fake news dataset
+    ├── news_articles.csv                     # News corpus for topic modeling
+    ├── book_reviews_sample.csv               # Book reviews for sentiment analysis
+    └── tripadvisor_hotel_reviews.csv         # Hotel reviews dataset
+```
+
+---
+
+## LLMs_Projects
+
+### Overview
+Practical tutorials for working with modern Large Language Models including OpenAI's GPT models, LangChain framework, and Hugging Face Transformers.
+
+### Key Features
+- **API Integration** — Direct integration with OpenAI GPT models
+- **Prompt Engineering** — Techniques for crafting effective prompts
+- **LangChain Framework** — Building chains and agents with LLMs
+- **Hugging Face Models** — Using pre-trained transformer models locally
+
+### Notebooks
+
+#### `GPT Models.ipynb`
+Demonstrates OpenAI's GPT API usage:
+- API setup and authentication via `config.py`
+- Text generation with `davinci-002` engine
+- Customizing output (temperature, max_tokens)
+- Chat completion with GPT-3.5-turbo
+- Text summarization and keyword extraction
+- Poetic chatbot implementation
+
+**Key functions:**
+```python
+def generate_text(prompt, max_tokens, temperature)
+def text_summarizer(prompt)
+```
+
+**Libraries:** `openai`, `config`
+
+---
+
+#### `Langchain.ipynb`
+Introduction to the LangChain framework:
+- LLM model initialization and configuration
+- Prompt templates and prompt chaining
+- Memory management for multi-turn conversations
+- Agents and tools integration
+- Chain orchestration patterns
+
+**Key concepts:**
+- Retrieval-Augmented Generation (RAG)
+- Custom chains composition
+- Multi-step reasoning pipelines
+
+**Libraries:** `langchain`, `openai`
+
+---
+
+#### `HuggingFace Transformers.ipynb`
+Working with Hugging Face pre-trained models:
+- Model loading and inference
+- Pipeline abstractions for common tasks
+- Fine-tuning strategies
+- Model serialization and caching
+- Performance optimization
+
+**Common tasks:**
+- Text classification
+- Sentiment analysis
+- Question answering
+- Text generation
+
+**Libraries:** `transformers`, `torch`/`tensorflow`, `datasets`
+
+---
+
+### Configuration
+
+**File:** `config.py` (Git-ignored for security)
+
+```python
+api_key = "your-openai-api-key-here"
+# Add other LLM provider keys as needed
+```
+
+⚠️ **Security Note:** Never commit API keys. The file is in `.gitignore`.
+
+---
+
+### Saved Models Directory
+
+Large model files are stored in `my_saved_models/` and excluded from version control. This directory is safe for:
+- Downloaded pre-trained models
+- Fine-tuned model checkpoints
+- Model artifacts and weights
+
+---
+
+## NLP_Projects
+
+### Overview
+Comprehensive collection of NLP tutorials covering the full pipeline from raw text to advanced ML applications.
+
+### Key Features
+- **Text Preprocessing** — Cleaning, tokenization, stemming, lemmatization
+- **Sentiment Analysis** — VADER lexicon-based and transformer-based approaches
+- **Text Vectorization** — Count vectorizer and TF-IDF techniques
+- **Topic Modeling** — LDA and LSA implementations
+- **NER & POS Tagging** — Named entity recognition and part-of-speech analysis
+- **Text Classification** — ML and DL approaches
+- **Fake News Detection** — Multi-stage classification pipeline
+
+### Notebooks
+
+#### `NLP_Text_Pre_Processing.ipynb`
+Foundation for all NLP tasks:
+- Lowercase normalization
+- Punctuation removal
+- Stopword filtering
+- Tokenization (word & sentence)
+- Stemming (Porter Stemmer)
+- Lemmatization (WordNet)
+- Custom preprocessing pipelines
+
+**Output:** Clean, tokenized data ready for modeling
+
+---
+
+#### `NLP_Sentiment_Analysis.ipynb`
+Two complementary approaches to sentiment analysis:
+
+**VADER (Lexicon-based):**
+- Fast, no training required
+- Scores: compound score (-1 to 1)
+- Categories: negative, neutral, positive
+- Dataset: `book_reviews_sample.csv`
+
+**Transformer-based:**
+- Deep learning with pre-trained models
+- More context-aware predictions
+- Comparison with VADER scores
+
+**Output:** Sentiment labels and scores for comparison
+
+---
+
+#### `NLP_POS_and_NER.ipynb`
+Linguistic analysis tasks:
+- **POS Tagging:** Identify verbs, nouns, adjectives, etc.
+- **NER:** Extract people, organizations, locations
+- Libraries: `nltk`, `spaCy`
+- Visualization of linguistic structures
+
+---
+
+#### `NLP_Text_Classifier.ipynb`
+Supervised text classification:
+- Feature extraction (TF-IDF, embeddings)
+- Model training (Naive Bayes, SVM, etc.)
+- Hyperparameter tuning
+- Evaluation metrics (precision, recall, F1)
+
+---
+
+#### `NLP_Topic_Modelling_LDA.ipynb`
+Latent Dirichlet Allocation:
+- Unsupervised topic discovery
+- Dataset: `news_articles.csv`
+- Document-term matrix creation
+- Visualization of topic distributions
+- Topic interpretation
+
+**Key steps:**
+1. Text preprocessing and stemming
+2. Dictionary and corpus creation
+3. LDA model training (2+ topics)
+4. Topic extraction and visualization
+
+---
+
+#### `NLP_Topic_Modelling_LSA.ipynb`
+Latent Semantic Analysis:
+- SVD-based dimensionality reduction
+- Conceptual similarity between documents
+- Comparison with LDA approach
+- Interpretability of latent factors
+
+---
+
+#### `NLP_Vectorizing_Text_Count_Vectorizer.ipynb`
+Bag-of-Words vectorization:
+- Frequency-based text representation
+- Vocabulary building
+- Sparse matrix output
+- Baseline for text classification
+
+---
+
+#### `NLP_Vectorizing_Text_TF-IDF.ipynb`
+TF-IDF vectorization:
+- Term frequency-inverse document frequency
+- Importance weighting
+- Dimensionality considerations
+- Comparison with Count Vectorizer
+
+---
+
+#### `NLP_Categorizing_Fake_News.ipynb`
+End-to-end fake news classification:
+- Multi-class classification (real vs. fake)
+- Feature engineering pipeline
+- Model comparison and selection
+- Evaluation on imbalanced data
+- Dataset: `fake_news_data.csv`
+
+---
+
+### Datasets
+
+| Dataset | Size | Purpose | Format |
+|---------|------|---------|--------|
+| `bbc_news.csv` | BBC articles | Topic modeling, text classification | CSV |
+| `fake_news_data.csv` | Fake/real news | Fake news detection | CSV |
+| `news_articles.csv` | News corpus | Topic modeling (LDA/LSA) | CSV |
+| `book_reviews_sample.csv` | Book reviews | Sentiment analysis | CSV |
+| `tripadvisor_hotel_reviews.csv` | Hotel reviews | Sentiment & preprocessing | CSV |
+
+---
+
+## Environment & Requirements
+
+### Python Version
+- **Recommended:** Python 3.9 or newer
+- **Minimum:** Python 3.8
+
+### Virtual Environment Setup
+
 ```bash
-pip install --upgrade pip
-pip install pandas numpy nltk spacy scikit-learn jupyterlab
+# Create virtual environment
+python -m venv .venv
+
+# Activate (macOS/Linux)
+source .venv/bin/activate
+
+# Activate (Windows)
+.venv\Scripts\activate
+```
+
+### Dependencies
+
+#### Core Libraries
+```bash
+pip install pandas numpy scikit-learn
+```
+
+#### NLP Libraries
+```bash
+pip install nltk spacy gensim
 python -m spacy download en_core_web_sm
 ```
 
-**Quick Start**
-- Open the project folder in VS Code or start Jupyter Lab:
+#### LLM & Transformers
 ```bash
-# From project root
+pip install openai langchain transformers torch
+# or tensorflow instead of torch
+pip install tensorflow
+```
+
+#### Sentiment Analysis
+```bash
+pip install vaderSentiment
+```
+
+#### Jupyter
+```bash
+pip install jupyterlab notebook ipykernel
+```
+
+#### Complete Installation (all projects)
+```bash
+pip install pandas numpy scikit-learn nltk spacy gensim \
+            openai langchain transformers torch \
+            vaderSentiment jupyterlab notebook
+python -m spacy download en_core_web_sm
+```
+
+Or use a `requirements.txt`:
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Quick Start
+
+### 1. Clone and Setup
+```bash
+git clone https://github.com/juliocesarcs2004/AI-Engineering.git
+cd AI-Engineering
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 2. Launch Jupyter
+```bash
 jupyter lab
-# or
-jupyter notebook
 ```
-- Then open and run cells in `NLP_Text_Pre_Processing.ipynb` to begin. Work through `NLP_POS_and_NER.ipynb` for tagging and entity examples.
 
-**Usage examples**
-- Load a small sample (faster for testing):
+### 3. NLP Path (Start here if new to NLP)
+1. Open `NLP_Projects/NLP_Text_Pre_Processing.ipynb`
+2. Run through preprocessing examples
+3. Move to `NLP_Sentiment_Analysis.ipynb`
+4. Explore topic modeling: `NLP_Topic_Modelling_LDA.ipynb`
+
+### 4. LLM Path (Requires API keys)
+1. Create `LLMs_Projects/config.py` with your OpenAI API key
+2. Open `LLMs_Projects/GPT Models.ipynb`
+3. Run examples and experiment with prompts
+4. Explore `Langchain.ipynb` for advanced patterns
+
+---
+
+## Usage Examples
+
+### NLP: Basic Sentiment Analysis
 ```python
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import pandas as pd
-df = pd.read_csv('tripadvisor_hotel_reviews.csv', nrows=5000)
+
+# Load data
+df = pd.read_csv('NLP_Projects/book_reviews_sample.csv')
+
+# Analyze sentiment
+analyzer = SentimentIntensityAnalyzer()
+df['sentiment_score'] = df['reviewText'].apply(
+    lambda x: analyzer.polarity_scores(x)['compound']
+)
+
+print(df[['reviewText', 'sentiment_score']].head())
 ```
-- Example: basic tokenization with spaCy
+
+### NLP: Text Preprocessing Pipeline
 ```python
-import spacy
-nlp = spacy.load('en_core_web_sm')
-doc = nlp('This is an example sentence for tokenization and POS tagging.')
-for token in doc:
-	print(token.text, token.pos_)
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
+
+nltk.download('stopwords')
+nltk.download('punkt')
+
+text = "Natural Language Processing is amazing!"
+tokens = word_tokenize(text.lower())
+stop_words = set(stopwords.words('english'))
+filtered = [t for t in tokens if t not in stop_words]
+stemmer = PorterStemmer()
+stemmed = [stemmer.stem(t) for t in filtered]
+
+print(stemmed)
 ```
 
-**Best practices**
-- Use a virtual environment to avoid dependency conflicts.  
-- Save intermediate datasets (cleaned versions) to speed exploration.  
-- Fix random seeds (`random`, `numpy.random`, or `sklearn` functions) for reproducible results.
+### LLM: Simple Text Generation
+```python
+import openai
+from LLMs_Projects import config
 
-**Contributing**
-- **Additions welcome:**: New notebooks, helper scripts, or improved preprocessing methods are useful.  
-- **How to contribute:**: Create a branch, add your changes, and open a pull request with a clear description. If you add packages, include or update a `requirements.txt`.
+openai.api_key = config.api_key
 
-**Files to consider adding**
-- `requirements.txt` — pinned dependencies for easy install.  
-- `data/` — a directory to store datasets instead of keeping them at root.  
-- `LICENSE` — add a license (for example `MIT`) if you plan to share publicly.
+response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Explain quantum computing in simple terms."}
+    ]
+)
 
-**License & Contact**
-- **License:**: No license file is included. Add one if you want to define sharing permissions (recommended: `MIT`).
-- **Contact / Issues:**: Use the repository Issues to report problems or ask questions.
+print(response.choices[0].message.content)
+```
+
+### LLM: LangChain Chain
+```python
+from langchain.llms import OpenAI
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+
+llm = OpenAI(temperature=0.7, openai_api_key="your-key")
+
+prompt = PromptTemplate(
+    input_variables=["topic"],
+    template="Write a short poem about {topic}"
+)
+
+chain = LLMChain(llm=llm, prompt=prompt)
+result = chain.run(topic="AI")
+print(result)
+```
 
 ---
 
-If you want, I can:
-- create a `requirements.txt` with the recommended libraries, or
-- move datasets into a `data/` folder and update the notebooks, or
-- translate the README into Portuguese.
+## Best Practices
 
-Thank you — let me know which improvements you prefer next.
- 
+### Code Quality
+- Always use a virtual environment to isolate dependencies
+- Save random seeds for reproducibility:
+  ```python
+  import random, numpy as np
+  random.seed(42)
+  np.random.seed(42)
+  ```
+- Use descriptive variable names and add comments
+
+### Data Handling
+- Create a `data/` directory for organizing datasets
+- Save intermediate processed data to avoid recomputation
+- Document data sources and preprocessing steps
+- Use `.gitignore` for large files (> 100 MB)
+
+### Model Development
+- Start with baseline models before complex ones
+- Always evaluate on a separate test set
+- Log hyperparameters and results
+- Version control important model checkpoints
+
+### API Usage (LLMs)
+- Store API keys in `config.py` (Git-ignored)
+- Monitor token usage for cost control
+- Implement rate limiting for API calls
+- Use appropriate temperature for your use case:
+  - **0.0** = deterministic (good for structured tasks)
+  - **0.7** = balanced (good for general use)
+  - **1.0+** = creative (good for creative writing)
+
 ---
 
-**Table of contents**
+## Git Configuration
 
-- [Overview](#overview)
-- [Datasets](#datasets)
-- [Notebooks (high level)](#notebooks-high-level)
-- [Quick setup](#quick-setup)
-- [Usage examples](#usage-examples)
-- [Project layout](#project-layout)
-- [Best practices](#best-practices)
-- [Contributing](#contributing)
-- [Suggested next steps](#suggested-next-steps)
-- [License & Contact](#license--contact)
+### Ignored Files
+The `.gitignore` file excludes:
+- `LLMs_Projects/config.py` — API keys and credentials
+- `__pycache__/` — Python cache files
+- `LLMs_Projects/my_saved_models/` — Large model files
+- `.ipynb_checkpoints/` — Jupyter checkpoints
+
+### Large File Handling
+Do not commit files > 100 MB. If added accidentally:
+```bash
+git rm --cached LLMs_Projects/my_saved_models/model.safetensors
+git commit -m "Remove large model file"
+```
+
+---
+
+## Contributing
+
+### Workflow
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/my-nlp-tutorial`
+3. **Implement** your changes with clear documentation
+4. **Test** locally to ensure notebooks run without errors
+5. **Commit** with descriptive messages
+6. **Push** and **create a Pull Request**
+
+### Guidelines
+- Add clear markdown headers and explanations in notebooks
+- Include docstrings for helper functions
+- Update this README for new notebooks or datasets
+- Keep notebook file sizes reasonable (< 50 MB)
+- Verify all cells run without errors before submitting
+
+### Adding New Notebooks
+If adding a new notebook:
+1. Create file in appropriate folder (`LLMs_Projects/` or `NLP_Projects/`)
+2. Add description to README.md
+3. Include dataset path references if needed
+4. Add learning objectives in first markdown cell
+
+---
+
+## License & Contact
+
+### License
+No license file is currently included. To enable public sharing, consider adding:
+- **Recommended:** MIT License (permissive, widely used)
+- **Alternative:** Creative Commons for educational content
+
+### Repository Information
+- **Owner:** [@juliocesarcs2004](https://github.com/juliocesarcs2004)
+- **Repository:** [AI-Engineering](https://github.com/juliocesarcs2004/AI-Engineering)
+
+### Contact & Issues
+- Use **GitHub Issues** to report bugs or ask questions
+- For feature requests, open a discussion or issue
+
+### Acknowledgments
+- OpenAI for GPT models
+- Hugging Face for transformer models and datasets
+- NLTK and spaCy communities for NLP tools
+- Researchers and educators in the AI community
+
+---
+
+## Next Steps
+
+Consider implementing:
+- [ ] `requirements.txt` with pinned versions
+- [ ] GitHub Actions CI/CD for notebook validation
+- [ ] API documentation for custom functions
+- [ ] Performance benchmarks for models
+- [ ] Docker setup for reproducible environments
+- [ ] Automated data downloading scripts
+- [ ] Additional languages (Portuguese, Spanish, etc.)
+
+---
+
+**Last Updated:** December 5, 2025  
+**Status:** Actively maintained  
+**Contributions:** Welcome!
 
 ## Overview
 
@@ -264,6 +742,6 @@ Tell me which of these you want and I will implement it.
 
 ## License & Contact
 
-No license file is included. Add a license (for example `MIT`) if you plan to publish the code. Use the repository Issues to report questions or request features.
+No license file is included. Use the repository Issues to report questions or request features.
 
 
