@@ -45,7 +45,11 @@ AI-Engineering/
 │   ├── GPT Models.ipynb               # OpenAI GPT API interactions
 │   ├── Langchain.ipynb                # LangChain framework examples
 │   ├── HuggingFace Transformers.ipynb # Hugging Face model usage
-│   └── my_saved_models/               # Directory for cached/saved models
+│   ├── Text classification with XLNET.ipynb # XLNet emotion classification
+│   ├── emotions_data/                 # Emotion labeled datasets
+│   ├── test_trainer/                  # XLNet model checkpoints
+│   ├── my_saved_models/               # Directory for cached/saved models
+│   └── fine_tuned_model/              # Fine-tuned model artifacts
 │
 └── NLP_Projects/                      # Natural Language Processing projects
     ├── NLP_Text_Pre_Processing.ipynb         # Text cleaning, tokenization, lemmatization
@@ -130,6 +134,58 @@ Working with Hugging Face pre-trained models:
 - Text generation
 
 **Libraries:** `transformers`, `torch`/`tensorflow`, `datasets`
+
+---
+
+#### `Text classification with XLNET.ipynb`
+End-to-end emotion classification using XLNet transformer model:
+
+**Pipeline:**
+1. **Data Loading & Preprocessing**
+   - Load emotion-labeled training, validation, and test datasets
+   - Text cleaning using `cleantext` library (remove emojis, special characters)
+   - Remove mentions (@username)
+   - Balance dataset using stratified sampling
+
+2. **Exploratory Data Analysis**
+   - Visualize label distribution before/after balancing
+   - Ensure balanced representation of all emotion classes
+
+3. **Tokenization**
+   - Use XLNet tokenizer (xlnet-base-cased)
+   - Padding and truncation to max_length=128
+   - Create token_type_ids and attention_mask
+   - Convert to HuggingFace datasets format
+
+4. **Model Fine-tuning**
+   - Load pre-trained XLNetForSequenceClassification
+   - Configure for 4-class emotion classification (anger, fear, joy, sadness)
+   - Define custom compute_metrics (accuracy)
+   - Train using HuggingFace Trainer API
+   - 3 epochs with evaluation every epoch
+
+5. **Output**
+   - Trained model checkpoints in `test_trainer/` directory
+   - Evaluation metrics and model performance
+
+**Dataset Requirements:**
+- CSV files with columns: `text`, `label`
+- Expected location: `./emotions_data/` (relative to notebook)
+- Files: `emotion-labels-train.csv`, `emotion-labels-test.csv`, `emotion-labels-val.csv`
+
+**Key Components:**
+```python
+tokenizer = XLNetTokenizer.from_pretrained("xlnet-base-cased")
+model = XLNetForSequenceClassification.from_pretrained('xlnet-base-cased', 
+                                                       num_labels=4,
+                                                       id2label={0: 'anger', 1: 'fear', 2: 'joy', 3: 'sadness'})
+trainer = Trainer(model=model, args=training_args, 
+                  train_dataset=tokenized_data,
+                  compute_metrics=compute_metrics)
+trainer.train()
+```
+
+**Libraries:** `transformers`, `torch`, `datasets`, `evaluate`, `cleantext`, `sklearn`
 
 ---
 
